@@ -14,14 +14,19 @@
   <% end %>
 
   <div>
+    <%= form.label :username, style: "display: block" %>
+    <%= form.text_field :username, value: @user.username, required: true, autofocus: true %>
+  </div>
+
+  <div>
     <%= form.label :email, style: "display: block" %>
-    <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email" %>
+    <%= form.email_field :email, value: @user.email, required: true, autocomplete: "email" %>
   </div>
 
   <div>
     <%= form.label :password, style: "display: block" %>
     <%= form.password_field :password, required: true, autocomplete: "new-password" %>
-    <div>12 characters minimum.</div>
+    <div>7 characters minimum.</div>
   </div>
 
   <div>

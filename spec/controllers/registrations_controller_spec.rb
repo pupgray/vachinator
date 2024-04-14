@@ -13,7 +13,7 @@ RSpec.describe RegistrationsController do
       user = build(:user)
 
       expect {
-        post :create, params: { email: user.email, password: user.password, password_confirmation: user.password }
+        post :create, params: { username: user.username, email: user.email, password: user.password, password_confirmation: user.password }
       }.to change(User, :count).by(1)
 
       expect(response).to redirect_to(root_url)
