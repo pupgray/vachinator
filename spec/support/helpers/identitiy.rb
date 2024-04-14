@@ -14,10 +14,18 @@ module Helpers
         visit origin_path
       end
     end
+
     module ControllerTests
       def sign_in_as(user)
         session = user.sessions.create!
         cookies.signed.permanent[:session_token] = { value: session.id, httponly: true }
+        user
+      end
+    end
+
+    module RequestTests
+      def sign_in_as(user)
+        post(sign_in_path, params: { email: user.email, password: user.password })
         user
       end
     end

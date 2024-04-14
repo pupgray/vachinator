@@ -1,13 +1,15 @@
 @use "theme/fn";
 
+:root {
+  background-image: url("https://www.transparenttextures.com/patterns/brilliant.png");
+  background-repeat: repeat;
+}
+
 body {
   display: grid;
   grid-template-rows: minmax(120px, auto) 1fr;
   grid-template-columns: repeat(12, 1fr);
   gap: 1rem;
-  background-image: url("https://www.transparenttextures.com/patterns/brilliant.png");
-  background-repeat: repeat;
-  min-height: 100vh;
 
   @include fn.smaller_than(lg) {
     grid-template-columns: repeat(10, 1fr);
@@ -38,8 +40,8 @@ header {
     h1 {
       margin: 0;
 
-      ph-cow {
-        transform: translateY(5.5px);
+      .ph-cow {
+        transform: translateY(2.5px);
         display: inline-block;
       }
     }

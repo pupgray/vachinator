@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :team_membership do
-    user { nil }
-    team { nil }
-    joined_with { nil }
+    user
+    team
+
+    association :joined_with, factory: :invite_link
   end
 end

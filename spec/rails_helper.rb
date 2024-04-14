@@ -36,6 +36,7 @@ RSpec.configure do |config|
   config.include Helpers::Mailer
   config.include Helpers::Identity::FeatureTests, type: :feature
   config.include Helpers::Identity::ControllerTests, type: :controller
+  config.include Helpers::Identity::RequestTests, type: :request
   config.after(:all) do |example|
     ActiveJob::Base.queue_adapter.shutdown if ActiveJob::Base.queue_adapter.is_a? ActiveJob::QueueAdapters::AsyncAdapter
   end
