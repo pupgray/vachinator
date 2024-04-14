@@ -1,14 +1,12 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Teams</h1>
 
-<div id="teams">
+<%= turbo_frame_tag :teams do %>
   <% @teams.each do |team| %>
     <%= render team %>
     <p>
       <%= link_to "Show this team", team %>
     </p>
   <% end %>
-</div>
+<% end %>
 
 <%= link_to "New team", new_team_path %>

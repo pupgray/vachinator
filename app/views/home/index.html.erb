@@ -1,16 +1,15 @@
-<h2>Login and verification</h2>
+<%= turbo_frame_tag :teams, src: teams_path, target: '_top' %>
+<%= link_to "New team", new_team_path %>
+
 
 <div>
-  <%= link_to "Change password", edit_password_path %>
-</div>
-
-<div>
+  <h2>Login and verification</h2>
+  <%= link_to "Change password", edit_password_path %></br>
   <%= link_to "Change email address", edit_identity_email_path %>
 </div>
 
-<h2>Access history</h2>
-
 <div>
+  <h2>Access history</h2>
   <%= link_to "Devices & Sessions", sessions_path %>
 </div>
 
