@@ -15,8 +15,11 @@
  */
 
 @use '../pico-main/scss/pico' with (
-  $theme-color: "orange",
-  $enable-semantic-container: true,
-  $enable-classes: false
+  $theme-color: "lime",
+  $modules: (
+    "themes/default": false,
+    "content/code": false
+  )
 );
 
+@use 'theme/precise';

@@ -1,3 +1,38 @@
-main {
-  background: green;
+@use "theme/fn";
+
+body {
+  display: grid;
+  grid-template-rows: minmax(120px, auto) 1fr;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  background-image: url("https://www.transparenttextures.com/patterns/brilliant.png");
+  background-repeat: repeat;
+  min-height: 100vh;
+
+  > * {
+    grid-column: 3 / span 8;
+
+    @include fn.smaller_than(lg) {
+      grid-column: 2 / span 10;
+    }
+  }
+}
+
+header {
+  display: grid;
+  grid-template-columns: subgrid;
+
+  > a {
+    display: flex;
+    align-items: center;
+    grid-column: 1 / span 3;
+
+    @include fn.smaller_than(lg) {
+      grid-column: 1 / span 5;
+    }
+
+    h1 {
+      margin: 0;
+    }
+  }
 }

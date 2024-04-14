@@ -1,0 +1,37 @@
+@use "sass:map";
+@use "../../pico-main/scss/settings" as *;
+@use "../pico-main/scss/themes/default/styles";
+
+@use "../pico-main/scss/themes/default/dark";
+
+:root {
+  @include dark.theme;
+}
+
+#{$parent-selector} progress,
+#{$parent-selector} [type="checkbox"],
+#{$parent-selector} [type="radio"],
+#{$parent-selector} [type="range"] {
+  accent-color: var(#{$css-var-prefix}primary);
+}
+
+%display {
+  font-family: "Chivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+h1, h2 {
+  @extend %display;
+}
+
+header a {
+  text-decoration: none;
+
+  > h1 {
+    font-style: italic;
+    font-weight: 800;
+    font-size: 2.5rem;
+  }
+}

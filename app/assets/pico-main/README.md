@@ -104,7 +104,7 @@ composer require picocss/pico
   </head>
   <body>
     <main class="container">
-      <h1>Hello world!</h1>
+      <h2>Hello world!</h2>
     </main>
   </body>
 </html>
@@ -151,7 +151,7 @@ Then just write pure HTML, and it should look great:
   </head>
   <body>
     <main>
-      <h1>Hello, world!</h1>
+      <h2>Hello, world!</h2>
     </main>
   </body>
 </html>

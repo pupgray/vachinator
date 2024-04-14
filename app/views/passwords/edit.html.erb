@@ -1,6 +1,6 @@
 <p style="color: red"><%= alert %></p>
 
-<h1>Change your password</h1>
+<h2>Change your password</h2>
 
 <%= form_with(url: password_path, method: :patch) do |form| %>
   <% if @user.errors.any? %>
