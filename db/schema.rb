@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_14_001012) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_14_033713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invite_links", force: :cascade do |t|
+    t.string "code", null: false
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.integer "spaces_remaining"
+    t.datetime "expires_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_invite_links_on_team_id"
+    t.index ["user_id"], name: "index_invite_links_on_user_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.string "name"
+    t.datetime "starts_at", precision: nil
+    t.datetime "ends_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_matches_on_team_id"
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -21,6 +43,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_001012) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.bigint "captain_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["captain_id"], name: "index_teams_on_captain_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,5 +63,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_001012) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "invite_links", "teams"
+  add_foreign_key "invite_links", "users"
+  add_foreign_key "matches", "teams"
   add_foreign_key "sessions", "users"
+  add_foreign_key "teams", "users", column: "captain_id"
 end
