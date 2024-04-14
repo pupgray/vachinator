@@ -1,5 +1,10 @@
 class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
+  has_many :teams, dependent: :destroy
+  has_many :invite_links, dependent: :nullify
+  has_many :compatriots, class_name: 'User', through: :teams, source: :members
+  has_many :matches, through: :teams
+
   validates :username, presence: true, uniqueness: true, format: { with: /[\w-]*/ }
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 7 }

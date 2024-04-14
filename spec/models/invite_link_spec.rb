@@ -10,5 +10,6 @@ RSpec.describe InviteLink, type: :model do
     expect do
       invite.save
     end.to change {invite.code}
+    puts invite.code
   end
 end

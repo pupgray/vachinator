@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_14_033713) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_14_043449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_033713) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "team_memberships", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "joined_with_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["joined_with_id"], name: "index_team_memberships_on_joined_with_id"
+    t.index ["team_id"], name: "index_team_memberships_on_team_id"
+    t.index ["user_id"], name: "index_team_memberships_on_user_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.bigint "captain_id", null: false
@@ -67,5 +78,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_033713) do
   add_foreign_key "invite_links", "users"
   add_foreign_key "matches", "teams"
   add_foreign_key "sessions", "users"
+  add_foreign_key "team_memberships", "invite_links", column: "joined_with_id"
+  add_foreign_key "team_memberships", "teams"
+  add_foreign_key "team_memberships", "users"
   add_foreign_key "teams", "users", column: "captain_id"
 end
