@@ -10,16 +10,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
+  <script
+    type="module"
+    src="https://unpkg.com/@phosphor-icons/webcomponents@2.1"
+  ></script>
+
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
 </head>
 
 <body>
-<header>
-  <%= link_to root_path do %>
-    <h1>Precise</h1>
-  <% end %>
-</header>
+<%= render 'layouts/header' %>
 <main>
   <%= yield %>
 </main>

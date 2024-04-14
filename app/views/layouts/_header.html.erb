@@ -1,0 +1,17 @@
+<header>
+  <%= link_to root_path do %>
+    <h1>
+      <ph-cow weight="fill"></ph-cow>
+      Vachinator
+    </h1>
+  <% end %>
+
+  <nav>
+    <% if Current.user %>
+      <%= Current.user.username %>
+      <%= button_to "Log out", Current.session, method: :delete %>
+    <% else %>
+      <%= button_to "Sign in", sign_in_path, method: :get %>
+    <% end %>
+  </nav>
+</header>

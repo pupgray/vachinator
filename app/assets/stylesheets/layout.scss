@@ -9,11 +9,19 @@ body {
   background-repeat: repeat;
   min-height: 100vh;
 
+  @include fn.smaller_than(lg) {
+    grid-template-columns: repeat(10, 1fr);
+  }
+
+  @include fn.smaller_than(sm) {
+    grid-template-columns: 20px repeat(6, 1fr) 20px;
+  }
+
   > * {
-    grid-column: 3 / span 8;
+    grid-column: 3 / -3;
 
     @include fn.smaller_than(lg) {
-      grid-column: 2 / span 10;
+      grid-column: 2 / -2;
     }
   }
 }
@@ -27,12 +35,50 @@ header {
     align-items: center;
     grid-column: 1 / span 3;
 
-    @include fn.smaller_than(lg) {
-      grid-column: 1 / span 5;
-    }
-
     h1 {
       margin: 0;
+
+      ph-cow {
+        transform: translateY(5.5px);
+        display: inline-block;
+      }
+    }
+  }
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    align-items: center;
+    grid-column: 4 / -1;
+
+    button[type=submit] {
+      padding: 0;
+      margin: 0;
+      background: none;
+      border: none;
+      color: fn.colour(primary);
+    }
+  }
+}
+
+main {
+  display: grid !important;
+  grid-template-columns: subgrid;
+
+  > * {
+    grid-column: 1 / -1;
+  }
+
+  > form:not(.button_to) {
+    grid-column: 1 / span 3;
+
+    @include fn.smaller_than(lg) {
+      grid-column: 1 / -4;
+    }
+
+    @include fn.smaller_than(md) {
+      grid-column: 1 / -1;
     }
   }
 }

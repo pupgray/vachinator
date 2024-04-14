@@ -22,7 +22,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    @session.destroy; redirect_to(sessions_path, notice: "That session has been logged out")
+    @session.destroy
+    cookies.signed.permanent[:session_token] = nil
+    redirect_to(sessions_path, notice: "That session has been logged out")
   end
 
   private
