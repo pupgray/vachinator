@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "/invite_links", type: :request do
   let(:team) { create(:team) }
   let(:user) { team.captain }
+  let(:different_user) { create(:user) }
   let(:invite_link) { create(:invite_link, team:, user:) }
 
   before do
@@ -44,6 +45,10 @@ RSpec.describe "/invite_links", type: :request do
   end
 
   describe "GET /join" do
+    before do
+      sign_in_as(different_user)
+    end
+
     it "renders a successful response" do
       get join_team_invite_link_path(invite_link.code)
       expect(response).to be_successful
@@ -60,20 +65,52 @@ RSpec.describe "/invite_links", type: :request do
   end
 
   describe "POST /join" do
+    before do
+      sign_in_as(different_user)
+    end
+
     it "adds current user to the members on that team" do
       expect do
         post join_team_invite_link_path(invite_link.code)
       end.to change { team.reload.members.count }.by(1)
     end
 
-    it "not to add current user to the members on that team" do
-      old = create(:invite_link, team:, user:)
-      old.expires_at = 10.years.ago
-      old.save
-
+    it "should decrement the remaining spaces on the link" do
       expect do
-        post join_team_invite_link_path(old.code)
-      end.not_to change { team.reload.members.count }
+        post join_team_invite_link_path(invite_link.code)
+      end.to change { invite_link.reload.spaces_remaining }.by(-1)
+    end
+
+    context 'bad link' do
+      it "not to add current user to the members on that team" do
+        old = create(:invite_link, team:, user:)
+        old.expires_at = 10.years.ago
+        old.save
+
+        expect do
+          post join_team_invite_link_path(old.code)
+        end.not_to change { team.reload.members.count }
+      end
+
+      it "should not decrement the remaining spaces on an expired link" do
+        old = create(:invite_link, team:, user:)
+        old.expires_at = 10.years.ago
+        old.save
+
+        expect do
+          post join_team_invite_link_path(old.code)
+        end.not_to change { old.reload.spaces_remaining }
+      end
+
+      it "should not decrement the remaining spaces on a link with no more spaces" do
+        packed = create(:invite_link, team:, user:, spaces_remaining: 1)
+
+        post join_team_invite_link_path(packed.code)
+
+        expect do
+          post join_team_invite_link_path(packed.code)
+        end.not_to change { packed.reload.spaces_remaining }
+      end
     end
   end
 

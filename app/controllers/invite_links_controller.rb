@@ -19,7 +19,7 @@ class InviteLinksController < ApplicationController
   def create_join
     return redirect_to root_path, alert: "Link was expired." if @invite_link.nil?
 
-    @invite_link.team.members << Current.user
+    @invite_link.join(Current.user)
 
     redirect_to @invite_link.team, notice: "Successfully joined #{@invite_link.team.name}."
   end
