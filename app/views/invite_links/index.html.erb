@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Invite links</h1>
+
+<%= link_to 'Back to team', @team %>
+
+<%= turbo_frame_tag :invite_links, target: '_top' do %>
+  <% @invite_links.each do |invite_link| %>
+    <%= render invite_link %>
+    <p>
+      <%= link_to "Show this invite link", team_invite_link_path(@team, invite_link) %>
+    </p>
+  <% end %>
+  <%= link_to "New invite link", new_team_invite_link_path %>
+<% end %>
+

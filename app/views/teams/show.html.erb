@@ -2,6 +2,8 @@
 
 <%= render @team %>
 
+<%= turbo_frame_tag :invite_links, src: team_invite_links_path(@team), target: '_top' %>
+
 <div>
   <%= link_to "Edit this team", edit_team_path(@team) %> |
   <%= link_to "Back to teams", teams_path %>

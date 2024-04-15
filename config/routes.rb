@@ -1,16 +1,24 @@
 Rails.application.routes.draw do
-  resources :teams
+  resources :teams do
+    resources :invite_links, path: 'links'
+  end
   resources :users, only: %i[show]
-  get  "sign_in", to: "sessions#new"
+
+  scope controller: :invite_links do
+    get 'join/:code', action: :new_join, as: 'join_team_invite_link'
+    post 'join/:code', action: :create_join
+  end
+
+  get "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
-  get  "sign_up", to: "registrations#new"
+  get "sign_up", to: "registrations#new"
   post "sign_up", to: "registrations#create"
   resources :sessions, only: [:index, :show, :destroy]
-  resource  :password, only: [:edit, :update]
+  resource :password, only: [:edit, :update]
   namespace :identity do
-    resource :email,              only: [:edit, :update]
+    resource :email, only: [:edit, :update]
     resource :email_verification, only: [:show, :create]
-    resource :password_reset,     only: [:new, :edit, :create, :update]
+    resource :password_reset, only: [:new, :edit, :create, :update]
   end
   root "home#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

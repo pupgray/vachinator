@@ -1,6 +1,6 @@
 FactoryBot.define do
-  factory :invite_link do
-    code { Faker::Alphanumeric.alphanumeric(number: 10) }
+  factory :invite_link, class: InviteLink do
+    code { nil }
     user
     team
     spaces_remaining { 1 }

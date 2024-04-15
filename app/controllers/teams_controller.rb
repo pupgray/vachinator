@@ -22,7 +22,6 @@ class TeamsController < ApplicationController
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params)
-
     @team.captain = Current.user
 
     if @team.save

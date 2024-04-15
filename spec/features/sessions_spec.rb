@@ -15,7 +15,7 @@ feature "Sessions" do
       sign_in_as user
 
       click_on "Devices & Sessions"
-      assert_selector "h1", text: "Sessions"
+      assert_selector "h2", text: "Sessions"
     end
   end
 

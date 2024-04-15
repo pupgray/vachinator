@@ -1,0 +1,9 @@
+<h1>New invite link</h1>
+
+<%= render "form", team: @team, invite_link: @invite_link %>
+
+<br>
+
+<div>
+  <%= link_to "Back to invite links", team_invite_links_path(@team) %>
+</div>

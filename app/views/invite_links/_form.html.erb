@@ -1,0 +1,27 @@
+<%# locals: (team:, invite_link:) -%>
+
+<%= form_with(model: [team, invite_link]) do |form| %>
+  <% if invite_link.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(invite_link.errors.count, "error") %> prohibited this invite_link from being saved:</h2>
+
+      <ul>
+        <% invite_link.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.date_field :expires_at, value: Time.now + 30.days %>
+  </div>
+
+  <div>
+    <%= form.number_field :spaces_remaining %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

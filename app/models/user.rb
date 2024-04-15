@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
-  has_many :teams, dependent: :destroy, inverse_of: :captain
+  has_many :owned_teams, class_name: 'Team', dependent: :destroy, inverse_of: :captain
+  has_many :memberships, class_name: 'TeamMembership', dependent: :destroy
+  has_many :teams, through: :memberships, inverse_of: :members
   has_many :invite_links, dependent: :nullify
   has_many :compatriots, class_name: 'User', through: :teams, source: :members
   has_many :matches, through: :teams

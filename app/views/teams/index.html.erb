@@ -1,6 +1,6 @@
 <h1>Teams</h1>
 
-<%= turbo_frame_tag :teams do %>
+<%= turbo_frame_tag :teams, target: '_top' do %>
   <% @teams.each do |team| %>
     <%= render team %>
     <p>

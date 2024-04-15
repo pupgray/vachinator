@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_14_043449) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_14_232010) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "invite_links", force: :cascade do |t|
-    t.string "code", null: false
-    t.bigint "user_id", null: false
-    t.bigint "team_id", null: false
-    t.integer "spaces_remaining"
+    t.string "code"
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.integer "spaces_remaining", default: 69, null: false
     t.datetime "expires_at", precision: nil, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_043449) do
   create_table "team_memberships", force: :cascade do |t|
     t.bigint "team_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "joined_with_id", null: false
+    t.bigint "joined_with_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["joined_with_id"], name: "index_team_memberships_on_joined_with_id"

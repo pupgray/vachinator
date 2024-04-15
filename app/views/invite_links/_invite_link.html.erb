@@ -1,0 +1,9 @@
+<div id="<%= dom_id invite_link %>">
+  <%= invite_link.code %>
+
+  <%= button_to team_invite_link_path(invite_link.team, invite_link), method: :delete do %>
+    <i class="ph-fill ph-trash"></i>
+  <% end %>
+
+  <%= link_to "Edit this invite link", edit_team_invite_link_path(invite_link.team, invite_link) %>
+</div>

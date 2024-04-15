@@ -9,9 +9,9 @@
   <nav>
     <% if Current.user %>
       <%= Current.user.username %>
-      <%= button_to "Log out", Current.session, method: :delete %>
+      <%= button_to "Try Log out", Current.session, method: :delete %>
     <% else %>
-      <%= button_to "Sign in", sign_in_path, method: :get %>
+      <%= button_to "Try Sign in", sign_in_path, method: :get %>
     <% end %>
   </nav>
 </header>
