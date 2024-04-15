@@ -1,24 +1,11 @@
-# README
+![The logo for this stupid project. A little picture of a cow's face next to the word "Vacinator"](./logo.png "Vacinator")
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It's just a rails project! It will work like any rails project.
 
-Things you may want to cover:
+You will need Postgres set up though, this project will not work with the SQLite db driver!
 
-* Ruby version
+Just a little horny game :3c
 
-* System dependencies
+In very early days right now.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![A screenshot of the app, showing a "team" named "the gooners"](./screenshot.png "Screenshot")
