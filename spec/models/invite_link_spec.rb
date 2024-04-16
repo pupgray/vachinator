@@ -16,7 +16,7 @@ RSpec.describe InviteLink do
   describe '#join' do
     let(:user) { create(:user) }
     let(:herd) { create(:herd) }
-    let(:invite_link) { create(:invite_link, user: user, herd: herd, spaces_remaining: 5) }
+    let(:invite_link) { create(:invite_link, user:, herd:, spaces_remaining: 5) }
 
     it 'decrements remaining spaces by one' do
       expect do

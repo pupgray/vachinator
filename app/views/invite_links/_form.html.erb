@@ -13,13 +13,15 @@
     </div>
   <% end %>
 
-  <div>
+  <label>
+    Expires At
     <%= form.date_field :expires_at, value: Time.now + 30.days %>
-  </div>
+  </label>
 
-  <div>
+  <label>
+    Spaces Remaining
     <%= form.number_field :spaces_remaining %>
-  </div>
+  </label>
 
   <div>
     <%= form.submit %>
