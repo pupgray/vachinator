@@ -1,5 +1,5 @@
-<h2>Join <%= @invite_link.team.name %></h2>
+<h2>Join <%= @invite_link.herd.name %></h2>
 <p>
   You were invited by <%= @invite_link.user.username %>. Remaining: <%= pluralize @invite_link.spaces_remaining, 'space' %>
 </p>
-<%= button_to 'Join', join_team_invite_link_path(@invite_link.code), method: :post %>
+<%= button_to 'Join', join_herd_invite_link_path(@invite_link.code), method: :post %>

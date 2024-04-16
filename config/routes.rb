@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  resources :teams do
+  resources :herds do
     resources :invite_links, path: 'links'
   end
   resources :users, only: %i[show]
 
   scope controller: :invite_links do
-    get 'join/:code', action: :new_join, as: 'join_team_invite_link'
+    get 'join/:code', action: :new_join, as: 'join_herd_invite_link'
     post 'join/:code', action: :create_join
   end
 

@@ -1,0 +1,12 @@
+<h1>Teams</h1>
+
+<%= turbo_frame_tag :herds, target: '_top' do %>
+  <% @herds.each do |herd| %>
+    <%= render herd %>
+    <p>
+      <%= link_to "Show this herd", herd %>
+    </p>
+  <% end %>
+<% end %>
+
+<%= link_to "New herd", new_herd_path %>

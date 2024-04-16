@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @herd %>
+
+<%= turbo_frame_tag :invite_links, src: herd_invite_links_path(@herd), target: '_top' %>
+
+<div>
+  <%= link_to "Edit this herd", edit_herd_path(@herd) %> |
+  <%= link_to "Back to herds", herds_path %>
+
+  <%= button_to "Destroy this herd", @herd, method: :delete %>
+</div>

@@ -1,6 +1,6 @@
 class InviteLink < ApplicationRecord
   belongs_to :user
-  belongs_to :team
+  belongs_to :herd
 
   validates :expires_at, comparison: { greater_than: Time.now }, presence: true, on: :create
   validates :spaces_remaining, comparison: { greater_than_or_equal_to: 0 }, presence: true
@@ -17,6 +17,6 @@ class InviteLink < ApplicationRecord
   def join(user)
     self.spaces_remaining -= 1
     save!
-    team.members << user
+    herd.members << user
   end
 end

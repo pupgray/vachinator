@@ -8,4 +8,4 @@ Just a little horny game :3c
 
 In very early days right now.
 
-![A screenshot of the app, showing a "team" named "the gooners"](./screenshot.png "Screenshot")
+![A screenshot of the app, showing a "herd" named "the gooners"](./screenshot.png "Screenshot")

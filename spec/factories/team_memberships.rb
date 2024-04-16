@@ -1,7 +1,7 @@
 FactoryBot.define do
-  factory :team_membership do
+  factory :herd_membership do
     user
-    team
+    herd
 
     association :joined_with, factory: :invite_link
   end

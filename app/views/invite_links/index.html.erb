@@ -2,15 +2,15 @@
 
 <h1>Invite links</h1>
 
-<%= link_to 'Back to team', @team %>
+<%= link_to 'Back to herd', @herd %>
 
 <%= turbo_frame_tag :invite_links, target: '_top' do %>
   <% @invite_links.each do |invite_link| %>
     <%= render invite_link %>
     <p>
-      <%= link_to "Show this invite link", team_invite_link_path(@team, invite_link) %>
+      <%= link_to "Show this invite link", herd_invite_link_path(@herd, invite_link) %>
     </p>
   <% end %>
-  <%= link_to "New invite link", new_team_invite_link_path %>
+  <%= link_to "New invite link", new_herd_invite_link_path %>
 <% end %>
 

@@ -1,8 +1,8 @@
-class Team < ApplicationRecord
+class Herd < ApplicationRecord
   belongs_to :captain, class_name: 'User', required: true
   has_many :invite_links, dependent: :nullify
-  has_many :memberships, class_name: 'TeamMembership', dependent: :destroy
-  has_many :members, class_name: 'User', through: :memberships, source: :user, inverse_of: :teams
+  has_many :memberships, class_name: 'HerdMembership', dependent: :destroy
+  has_many :members, class_name: 'User', through: :memberships, source: :user, inverse_of: :herds
   has_many :matches, dependent: :destroy
 
   validates :captain, presence: true

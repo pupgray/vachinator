@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
-  has_many :owned_teams, class_name: 'Team', dependent: :destroy, inverse_of: :captain
-  has_many :memberships, class_name: 'TeamMembership', dependent: :destroy
-  has_many :teams, through: :memberships, inverse_of: :members
+  has_many :owned_herds, class_name: 'Herd', dependent: :destroy, inverse_of: :captain
+  has_many :memberships, class_name: 'HerdMembership', dependent: :destroy
+  has_many :herds, through: :memberships, inverse_of: :members
   has_many :invite_links, dependent: :nullify
-  has_many :compatriots, class_name: 'User', through: :teams, source: :members
-  has_many :matches, through: :teams
+  has_many :compatriots, class_name: 'User', through: :herds, source: :members
+  has_many :matches, through: :herds
 
   validates :username, presence: true, uniqueness: true, format: { with: /[\w-]*/ }
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }

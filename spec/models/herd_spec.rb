@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe TeamMembership, type: :model do
+RSpec.describe Herd, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

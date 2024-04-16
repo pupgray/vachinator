@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :team do
+  factory :herd do
     name { Faker::Team.name }
 
     association :captain, factory: :user
