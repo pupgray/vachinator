@@ -18,6 +18,7 @@ class InviteLinksController < ApplicationController
 
   def create_join
     return redirect_to root_path, alert: "Link was expired." if @invite_link.nil?
+    return render :new_join, status: :unprocessable_entity, alert: "You already joined this team" if @invite_link.team.has?(Current.user)
 
     @invite_link.join(Current.user)
 

@@ -12,4 +12,8 @@ class Team < ApplicationRecord
     members << captain
     save
   end
+
+  def has?(user)
+    members.exists?(user.id)
+  end
 end

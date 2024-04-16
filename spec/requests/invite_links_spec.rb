@@ -111,6 +111,22 @@ RSpec.describe "/invite_links", type: :request do
           post join_team_invite_link_path(packed.code)
         end.not_to change { packed.reload.spaces_remaining }
       end
+
+      it "renders a failure response if already joined" do
+        sign_in_as(create(:user))
+        post join_team_invite_link_path(invite_link.code)
+        post join_team_invite_link_path(invite_link.code)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it "does not decrement the remaining spaces on the link if already joined" do
+        sign_in_as(create(:user))
+        post join_team_invite_link_path(invite_link.code)
+
+        expect do
+          post join_team_invite_link_path(invite_link.code)
+        end.not_to change { invite_link.reload.spaces_remaining }
+      end
     end
   end
 
