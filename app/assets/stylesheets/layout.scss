@@ -7,7 +7,7 @@
 
 body {
   display: grid;
-  grid-template-rows: minmax(120px, auto) 1fr;
+  grid-template-rows: minmax(120px, auto);
   grid-template-columns: repeat(12, 1fr);
   gap: 1rem;
 
@@ -59,14 +59,17 @@ header {
       margin: 0;
       background: none;
       border: none;
-      color: fn.colour(primary);
+      color: fn.token(primary);
     }
   }
 }
 
 main {
   display: grid !important;
+  grid-template-rows: auto;
   grid-template-columns: subgrid;
+  grid-row: 2 / -1;
+  gap: 1rem;
 
   > * {
     grid-column: 1 / -1;
@@ -81,6 +84,65 @@ main {
 
     @include fn.smaller_than(md) {
       grid-column: 1 / -1;
+    }
+  }
+}
+
+.section__container {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-template-rows: auto;
+  gap: 1rem;
+  grid-auto-flow: row;
+
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    margin: 0;
+    padding: 1.5rem 1rem;
+    border-radius: fn.token(border-radius);
+
+    background: fn.token(muted-border-color);
+    border: 1px solid fn.token(contrast-focus);
+    box-shadow: fn.token(box-shadow);
+
+    grid-column-end: span 2;
+
+    &.large {
+      grid-column-end: span 4;
+    }
+
+    @include fn.smaller_than(xl) {
+      grid-column-end: span 4;
+
+      &.large {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @include fn.smaller_than(md) {
+      grid-column: 1 / -1;
+    }
+
+    > h3 {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    > form > button {
+      margin: 0;
+    }
+
+    > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex: 1 0 100%;
     }
   }
 }

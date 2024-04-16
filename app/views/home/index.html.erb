@@ -1,17 +1,20 @@
-<%= turbo_frame_tag :herds, src: herds_path, target: '_top' %>
-<%= link_to "New herd", new_herd_path %>
-
-
-<div>
-  <h2>Login and verification</h2>
-  <%= link_to "Change password", edit_password_path %></br>
-  <%= link_to "Change email address", edit_identity_email_path %>
-</div>
-
-<div>
-  <h2>Access history</h2>
-  <%= link_to "Devices & Sessions", sessions_path %>
-</div>
-
-<br>
-
+<% if Current.user %>
+  <div class="section__container">
+    <section>
+      <h3>You're part of <%= link_to pluralize(Current.user.herds.count, 'herd'), herds_path %>.</h3>
+      <%= button_to "New herd", new_herd_path, method: :get %>
+    </section>
+    <section>
+      <h3>You have <%= link_to pluralize(Current.user.matches.count, 'match'), herds_path %> on-going.</h3>
+      <%= button_to "New match", new_herd_path, method: :get %>
+    </section>
+    <section class="large">
+      <h3><%= pluralize Current.user.compatriots.count, 'compatriot' %></h3>
+      <div>
+        <% Current.user.compatriots.order('RANDOM()').take(5).map do |compatriot| %>
+          <%= link_to compatriot %>
+        <% end %>
+      </div>
+    </section>
+  </div>
+<% end %>

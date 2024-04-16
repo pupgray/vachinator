@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resource :email, only: %i[edit update]
     resource :email_verification, only: %i[show create]
     resource :password_reset, only: %i[new edit create update]
+    get 'settings', to: 'settings#index', as: 'settings'
   end
   root 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

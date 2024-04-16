@@ -13,6 +13,6 @@
   }
 }
 
-@function colour($token) {
+@function token($token) {
   @return var(#{$css-var-prefix}#{$token});
 }

@@ -12,6 +12,7 @@ describe 'Passwords' do
   it 'updating your password' do
     new_password = "#{user.password}!"
 
+    visit identity_settings_path
     click_on 'Change password'
     fill_in 'Password challenge', with: user.password
     fill_in 'New password', with: new_password

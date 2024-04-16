@@ -9,12 +9,16 @@ describe 'Sessions' do
     it 'signing out' do
       sign_in_as user
 
+      visit identity_settings_path
+
       click_on 'Log out'
       assert_text 'That session has been logged out'
     end
 
     it 'managing devices' do
       sign_in_as user
+
+      visit identity_settings_path
 
       click_on 'Devices & Sessions'
       assert_selector 'h2', text: 'Sessions'

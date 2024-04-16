@@ -9,6 +9,8 @@ describe 'Herd Management' do
   before do
     sign_in_as user
 
+    visit herds_path
+
     click_on 'New herd'
     fill_in 'Name', with: herd_name
     click_on 'Create Herd'

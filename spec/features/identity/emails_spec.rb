@@ -7,6 +7,7 @@ describe 'Emails' do
 
   before do
     sign_in_as user
+    visit identity_settings_path
   end
 
   it 'changing your email address' do
