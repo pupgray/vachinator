@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HerdMembership < ApplicationRecord
   belongs_to :user
   belongs_to :herd

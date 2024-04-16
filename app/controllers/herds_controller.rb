@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class HerdsController < ApplicationController
-  before_action :set_herd, only: %i[ show edit update destroy ]
+  before_action :set_herd, only: %i[show edit update destroy]
 
   # GET /herds or /herds.json
   def index
@@ -7,8 +9,7 @@ class HerdsController < ApplicationController
   end
 
   # GET /herds/1 or /herds/1.json
-  def show
-  end
+  def show; end
 
   # GET /herds/new
   def new
@@ -16,8 +17,7 @@ class HerdsController < ApplicationController
   end
 
   # GET /herds/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /herds or /herds.json
   def create
@@ -25,7 +25,7 @@ class HerdsController < ApplicationController
     @herd.captain = Current.user
 
     if @herd.save
-      redirect_to herd_url(@herd), notice: "Herd was successfully created."
+      redirect_to herd_url(@herd), notice: I18n.t('herd_was_successfully_created')
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,10 +33,13 @@ class HerdsController < ApplicationController
 
   # PATCH/PUT /herds/1 or /herds/1.json
   def update
-    return redirect_to herd_url(@herd), status: :unprocessable_entity, notice: "You are not the captain of this herd." if @herd.captain != Current.user
+    if @herd.captain != Current.user
+      return redirect_to herd_url(@herd), status: :unprocessable_entity,
+                                          notice: I18n.t('you_are_not_the_captain_of_this_herd')
+    end
 
     if @herd.update(herd_params)
-      redirect_to herd_url(@herd), notice: "Herd was successfully updated."
+      redirect_to herd_url(@herd), notice: I18n.t('herd_was_successfully_updated')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,7 +49,7 @@ class HerdsController < ApplicationController
   def destroy
     @herd.destroy!
 
-    redirect_to herds_url, notice: "Herd was successfully destroyed."
+    redirect_to herds_url, notice: I18n.t('herd_was_successfully_destroyed')
   end
 
   private

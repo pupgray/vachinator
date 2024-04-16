@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTeamMemberships < ActiveRecord::Migration[7.1]
   def change
     create_table :herd_memberships do |t|

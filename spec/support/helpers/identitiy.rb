@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Helpers
   module Identity
     module FeatureTests
@@ -5,11 +7,11 @@ module Helpers
         origin_path = current_path
         visit sign_in_path
 
-        fill_in "Email", with: user.email
-        fill_in "Password", with: user.password
-        click_on "Sign in"
+        fill_in 'Email', with: user.email
+        fill_in 'Password', with: user.password
+        click_on 'Sign in'
 
-        assert_text "Signed in successfully"
+        assert_text 'Signed in successfully'
 
         visit origin_path
       end

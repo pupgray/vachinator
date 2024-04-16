@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_16_032428) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_041838) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_032428) do
     t.datetime "updated_at", null: false
     t.index ["herd_id"], name: "index_herd_memberships_on_herd_id"
     t.index ["joined_with_id"], name: "index_herd_memberships_on_joined_with_id"
+    t.index ["user_id", "herd_id"], name: "index_herd_memberships_on_user_id_and_herd_id", unique: true
     t.index ["user_id"], name: "index_herd_memberships_on_user_id"
   end
 
@@ -72,6 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_032428) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "herd_memberships", "herds"

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :herd_membership do
     user
     herd
 
-    association :joined_with, factory: :invite_link
+    joined_with factory: %i[invite_link]
   end
 end

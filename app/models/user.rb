@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :owned_herds, class_name: 'Herd', dependent: :destroy, inverse_of: :captain

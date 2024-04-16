@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Identity::EmailsController do
@@ -21,7 +23,7 @@ RSpec.describe Identity::EmailsController do
     end
 
     it 'does not update email with wrong password challenge' do
-      patch :update, params: { email: user.email, password_challenge: user.password + '!' }
+      patch :update, params: { email: user.email, password_challenge: "#{user.password}!" }
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end

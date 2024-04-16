@@ -1,30 +1,32 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-feature "Sessions" do
+require 'rails_helper'
+
+describe 'Sessions' do
   let(:user) { create(:user) }
 
-  context "while signed in" do
-    scenario "signing out" do
+  context 'when signed in' do
+    it 'signing out' do
       sign_in_as user
 
-      click_on "Log out"
-      assert_text "That session has been logged out"
+      click_on 'Log out'
+      assert_text 'That session has been logged out'
     end
 
-    scenario "managing devices" do
+    it 'managing devices' do
       sign_in_as user
 
-      click_on "Devices & Sessions"
-      assert_selector "h2", text: "Sessions"
+      click_on 'Devices & Sessions'
+      assert_selector 'h2', text: 'Sessions'
     end
   end
 
-  scenario "signing in" do
+  it 'signing in' do
     visit sign_in_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_on "Sign in"
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_on 'Sign in'
 
-    assert_text "Signed in successfully"
+    assert_text 'Signed in successfully'
   end
 end

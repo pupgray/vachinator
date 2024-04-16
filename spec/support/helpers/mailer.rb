@@ -6,9 +6,12 @@ module Helpers
 
     class EmailFuckedUpOrGoneError < StandardError; end
 
-    class ParsedEmail < Struct.new(:mail, :html)
+    ParsedEmail = Struct.new(:mail, :html) do
       def find_link_url(text)
-        raise EmailFuckedUpOrGoneError, 'Cant find link because email was unparseable or does not exist' unless present?
+        if blank?
+          raise EmailFuckedUpOrGoneError,
+                'Cant find link because email was unparseable or does not exist'
+        end
 
         link = html.at("a:contains('#{text}')")
 
@@ -17,9 +20,7 @@ module Helpers
         link['href'] || nil
       end
 
-      def subject
-        mail.subject
-      end
+      delegate :subject, to: :mail
 
       def present?
         mail.present? && html.present?
@@ -29,19 +30,14 @@ module Helpers
     def find_mail_to(email)
       expect(ActionMailer::Base.deliveries.count).to be >= 1
 
-      mail = ActionMailer::Base.deliveries.find { |mail| mail.to.include?(email) }
+      mail = ActionMailer::Base.deliveries.find { |delivery| delivery.to.include?(email) }
       html = mail.present? ? Nokogiri::HTML(mail.body.to_s) : nil
 
-      parsed_email = ParsedEmail.new mail, html
-      expect(parsed_email).to be_present
-
-      parsed_email
+      ParsedEmail.new mail, html
     end
 
-    def await_mailing
-      assert_emails ActionMailer::Base.deliveries.count + 1 do
-        yield
-      end
+    def await_mailing(&)
+      assert_emails(ActionMailer::Base.deliveries.count + 1, &)
     end
   end
 end

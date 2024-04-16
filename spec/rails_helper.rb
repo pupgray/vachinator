@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -37,7 +39,7 @@ RSpec.configure do |config|
   config.include Helpers::Identity::FeatureTests, type: :feature
   config.include Helpers::Identity::ControllerTests, type: :controller
   config.include Helpers::Identity::RequestTests, type: :request
-  config.after(:all) do |example|
+  config.after(:all) do |_example|
     ActiveJob::Base.queue_adapter.shutdown if ActiveJob::Base.queue_adapter.is_a? ActiveJob::QueueAdapters::AsyncAdapter
   end
 

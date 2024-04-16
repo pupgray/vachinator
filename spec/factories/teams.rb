@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :herd do
     name { Faker::Team.name }
 
-    association :captain, factory: :user
+    captain factory: %i[user]
   end
 end
